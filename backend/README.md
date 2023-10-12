@@ -1,6 +1,22 @@
 # Spring Boot Login and Registration example with MongoDB
 
-https://www.bezkoder.com/spring-boot-mongodb-login-example/
+
+## uruchomienie bazy
+```
+docker run -d --name mongo -p 27018:27017 mongo:latest
+docker exec -it mongo bash
+mongosh
+use db
+db.roles.insertMany([ { name: "ROLE_USER" }, { name: "ROLE_MODERATOR" }, { name: "ROLE_ADMIN" },])
+```
+
+## endpointy
+http://localhost:8080/api/
+- test/all - do sprawdzenia czy dziala
+- auth/signup - rejestracja, body: email, username, password
+- auth/signin - logowanie, body: username, password
+- test/user - do sprawdzenie czy poprawnie zalogowano
+
 
 Build a Spring Boot Auth with HttpOnly Cookie, JWT, Spring Security and Spring Data MongoDB. You'll know:
 - Appropriate Flow for User Login and Registration with JWT
