@@ -1,4 +1,4 @@
-package com.tnbm.restapi.security.services;
+package com.tnbm.restapi.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

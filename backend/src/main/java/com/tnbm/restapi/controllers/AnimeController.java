@@ -1,6 +1,8 @@
 package com.tnbm.restapi.controllers;
 
 import java.util.Optional;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.tnbm.restapi.models.Anime;
+import com.tnbm.restapi.models.Genres;
 import com.tnbm.restapi.models.RootAnime;
 import com.tnbm.restapi.payload.response.MessageResponse;
 import com.tnbm.restapi.repository.AnimeRepository;
+import com.tnbm.restapi.repository.GenreRepository;
 
-//for Angular Client (withCredentials)
-//@CrossOrigin(origins = "http://localhost:8081", maxAge = 3600, allowCredentials="true")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/anime")
@@ -31,13 +33,16 @@ public class AnimeController {
     @Autowired
     private AnimeRepository animeRepository;
 
+    @Autowired
+    private GenreRepository genreRepository;
+
     @GetMapping("/read/all")
     public ResponseEntity<List<Anime>> getAllAnime() {
         return ResponseEntity.ok().body(animeRepository.findAll());
     }
 
     @GetMapping("/read/{id}")
-    public ResponseEntity<Optional<Anime>> getOneAnime(@PathVariable Integer id) {
+    public ResponseEntity<Optional<Anime>> getOneAnime(@PathVariable String id) {
         return ResponseEntity.ok().body(animeRepository.findById(id));
     }
 
@@ -48,17 +53,43 @@ public class AnimeController {
         RootAnime items;
         ResponseEntity<RootAnime> response = null;
         Map<String, Integer> genres = new HashMap<>();
+        List<Anime> animes = new ArrayList<>();
         for (int i = 1; i < 5; i++) {
             String url = uri + i;
             response = restTemplate.getForEntity(url, RootAnime.class);
-            // response.getBody().getData().forEach(anime -> {
-            // animeRepository.save(anime);
-            // });
-            System.out.println(response.getBody().getData());
+            items = response.getBody();
+            items.getData().forEach(item -> {
+                if (item.getGenres().size() > 0) {
+                    genres.merge(item.getGenres().get(0).getName(), 1, Integer::sum);
+                }
+                animes.add(item);
+            });
+
             if (i == 3) {
                 Thread.sleep(1000);
             }
         }
+
+        List<Genres> genresList = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : genres.entrySet()) {
+            Genres genre = new Genres();
+            genre.setName(entry.getKey());
+            genre.setValue(entry.getValue());
+            genresList.add(genre);
+        }
+
+        Collections.sort(animes, (a, b) -> {
+            Integer rankA = (a.getRank() != null) ? a.getRank() : 0;
+            Integer rankB = (b.getRank() != null) ? b.getRank() : 0;
+            return rankA.compareTo(rankB);
+        });
+
+        animeRepository.deleteAll();
+        animeRepository.insert(animes);
+
+        genreRepository.deleteAll();
+        genreRepository.insert(genresList);
+
         if (response != null)
             return response;
         else

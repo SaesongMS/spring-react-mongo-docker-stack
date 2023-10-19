@@ -9,13 +9,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @Document(collection = "anime")
 public class Anime {
   @Id
-  private Integer id;
+  private String id;
   private Integer mal_id = null;
   private String url = new String();
   private Images images;
@@ -57,6 +59,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Aired {
     private String from;
     private String to;
@@ -67,6 +70,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Broadcast {
     private String day;
     private String time;
@@ -78,6 +82,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Demographic {
     private Integer mal_id;
     private String type;
@@ -89,6 +94,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class ExplicitGenre {
     private Integer mal_id;
     private String type;
@@ -100,6 +106,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class From {
     private Integer day;
     private Integer month;
@@ -110,6 +117,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Genre {
     private Integer mal_id;
     private String type;
@@ -121,6 +129,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Images {
     private Jpg jpg;
     private Webp webp;
@@ -130,6 +139,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Jpg {
     private String image_url = new String();
     private String small_image_url = new String();
@@ -140,6 +150,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Licensor {
     private Integer mal_id;
     private String type;
@@ -151,6 +162,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Producer {
     private Integer mal_id;
     private String type;
@@ -162,6 +174,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Prop {
     private From from;
     private To to;
@@ -172,6 +185,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Studio {
     private Integer mal_id;
     private String type;
@@ -183,6 +197,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Theme {
     private Integer mal_id;
     private String type;
@@ -194,6 +209,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Title {
     private String type;
     private String title;
@@ -203,6 +219,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class To {
     private Integer day;
     private Integer month;
@@ -213,6 +230,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Trailer {
     private String youtube_id = new String();
     private String url = new String();
@@ -223,6 +241,7 @@ public class Anime {
   @Setter
   @AllArgsConstructor
   @NoArgsConstructor
+  @ToString
   public static class Webp {
     private String image_url = new String();
     private String small_image_url = new String();
