@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
@@ -13,9 +15,9 @@ import lombok.Setter;
 @Document(collection = "anime")
 public class Anime {
   @Id
-  private String id;
-  private Integer mal_id;
-  private String url;
+  private Integer id;
+  private Integer mal_id = null;
+  private String url = new String();
   private Images images;
   private Trailer trailer;
   private boolean approved;
@@ -53,7 +55,9 @@ public class Anime {
 
   @Getter
   @Setter
-  public class Aired {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Aired {
     private String from;
     private String to;
     private Prop prop;
@@ -61,7 +65,9 @@ public class Anime {
 
   @Getter
   @Setter
-  public class Broadcast {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Broadcast {
     private String day;
     private String time;
     private String timezone;
@@ -70,7 +76,9 @@ public class Anime {
 
   @Getter
   @Setter
-  public class Demographic {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Demographic {
     private Integer mal_id;
     private String type;
     private String name;
@@ -79,7 +87,9 @@ public class Anime {
 
   @Getter
   @Setter
-  public class ExplicitGenre {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class ExplicitGenre {
     private Integer mal_id;
     private String type;
     private String name;
@@ -88,7 +98,9 @@ public class Anime {
 
   @Getter
   @Setter
-  public class From {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class From {
     private Integer day;
     private Integer month;
     private Integer year;
@@ -96,7 +108,9 @@ public class Anime {
 
   @Getter
   @Setter
-  public class Genre {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Genre {
     private Integer mal_id;
     private String type;
     private String name;
@@ -105,30 +119,28 @@ public class Anime {
 
   @Getter
   @Setter
-  public class Images {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Images {
     private Jpg jpg;
     private Webp webp;
   }
 
   @Getter
   @Setter
-  public class Items {
-    private Integer count;
-    private Integer total;
-    private Integer per_page;
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Jpg {
+    private String image_url = new String();
+    private String small_image_url = new String();
+    private String large_image_url = new String();
   }
 
   @Getter
   @Setter
-  public class Jpg {
-    private String image_url;
-    private String small_image_url;
-    private String large_image_url;
-  }
-
-  @Getter
-  @Setter
-  public class Licensor {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Licensor {
     private Integer mal_id;
     private String type;
     private String name;
@@ -137,15 +149,9 @@ public class Anime {
 
   @Getter
   @Setter
-  public class Pagination {
-    private int last_visible_page;
-    private boolean has_next_page;
-    private Items items;
-  }
-
-  @Getter
-  @Setter
-  public class Producer {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Producer {
     private Integer mal_id;
     private String type;
     private String name;
@@ -154,7 +160,9 @@ public class Anime {
 
   @Getter
   @Setter
-  public class Prop {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Prop {
     private From from;
     private To to;
     private String string;
@@ -162,14 +170,9 @@ public class Anime {
 
   @Getter
   @Setter
-  public class RootAnime {
-    private List<Anime> data;
-    private Pagination pagination;
-  }
-
-  @Getter
-  @Setter
-  public class Studio {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Studio {
     private Integer mal_id;
     private String type;
     private String name;
@@ -178,7 +181,9 @@ public class Anime {
 
   @Getter
   @Setter
-  public class Theme {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Theme {
     private Integer mal_id;
     private String type;
     private String name;
@@ -187,14 +192,18 @@ public class Anime {
 
   @Getter
   @Setter
-  public class Title {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Title {
     private String type;
     private String title;
   }
 
   @Getter
   @Setter
-  public class To {
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class To {
     private Integer day;
     private Integer month;
     private Integer year;
@@ -202,17 +211,22 @@ public class Anime {
 
   @Getter
   @Setter
-  public class Trailer {
-    private String youtube_id;
-    private String url;
-    private String embed_url;
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Trailer {
+    private String youtube_id = new String();
+    private String url = new String();
+    private String embed_url = new String();
   }
 
   @Getter
   @Setter
-  public class Webp {
-    private String image_url;
-    private String small_image_url;
-    private String large_image_url;
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class Webp {
+    private String image_url = new String();
+    private String small_image_url = new String();
+    private String large_image_url = new String();
   }
+
 }
