@@ -1,29 +1,22 @@
 package com.tnbm.restapi.controllers;
 
-import java.util.Optional;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import java.lang.Thread;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.tnbm.restapi.models.Anime;
-import com.tnbm.restapi.models.Genres;
-import com.tnbm.restapi.models.RootAnime;
-import com.tnbm.restapi.payload.response.MessageResponse;
-import com.tnbm.restapi.repository.AnimeRepository;
-import com.tnbm.restapi.repository.GenreRepository;
+import com.tnbm.restapi.models.animes.Anime;
+import com.tnbm.restapi.services.AnimeService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -31,69 +24,39 @@ import com.tnbm.restapi.repository.GenreRepository;
 public class AnimeController {
 
     @Autowired
-    private AnimeRepository animeRepository;
+    private AnimeService animeService;
 
-    @Autowired
-    private GenreRepository genreRepository;
-
-    @GetMapping("/read/all")
-    public ResponseEntity<List<Anime>> getAllAnime() {
-        return ResponseEntity.ok().body(animeRepository.findAll());
-    }
-
-    @GetMapping("/read/{id}")
-    public ResponseEntity<Optional<Anime>> getOneAnime(@PathVariable String id) {
-        return ResponseEntity.ok().body(animeRepository.findById(id));
-    }
-
-    @GetMapping("/top_api")
+    @GetMapping("top_api")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getTop100Anime_API() throws InterruptedException {
-        String uri = "https://api.jikan.moe/v4/top/anime?page=";
-        RestTemplate restTemplate = new RestTemplate();
-        RootAnime items;
-        ResponseEntity<RootAnime> response = null;
-        Map<String, Integer> genres = new HashMap<>();
-        List<Anime> animes = new ArrayList<>();
-        for (int i = 1; i < 5; i++) {
-            String url = uri + i;
-            response = restTemplate.getForEntity(url, RootAnime.class);
-            items = response.getBody();
-            items.getData().forEach(item -> {
-                if (item.getGenres().size() > 0) {
-                    genres.merge(item.getGenres().get(0).getName(), 1, Integer::sum);
-                }
-                animes.add(item);
-            });
+        return ResponseEntity.ok().body(animeService.getTop100Anime_API());
+    }
 
-            if (i == 3) {
-                Thread.sleep(1000);
-            }
-        }
+    @GetMapping("top_db")
+    public ResponseEntity<List<?>> getTop100Anime_DB() {
+        return ResponseEntity.ok().body(animeService.getTop100Anime_DB());
+    }
 
-        List<Genres> genresList = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : genres.entrySet()) {
-            Genres genre = new Genres();
-            genre.setName(entry.getKey());
-            genre.setValue(entry.getValue());
-            genresList.add(genre);
-        }
+    @GetMapping("animes-by-genre")
+    public ResponseEntity<List<?>> getAnimesByGenre(@RequestBody Map<String, String> requestBody) {
+        return ResponseEntity.ok().body(animeService.getAnimesByGenre(requestBody.get("genre")));
+    }
 
-        Collections.sort(animes, (a, b) -> {
-            Integer rankA = (a.getRank() != null) ? a.getRank() : 0;
-            Integer rankB = (b.getRank() != null) ? b.getRank() : 0;
-            return rankA.compareTo(rankB);
-        });
+    @GetMapping("top3")
+    public ResponseEntity<List<Anime>> getTop3() {
+        return ResponseEntity.ok().body(animeService.getTop3());
+    }
 
-        animeRepository.deleteAll();
-        animeRepository.insert(animes);
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("addJSON")
+    public ResponseEntity<?> addJSON(@RequestParam("file") MultipartFile file) {
+        return ResponseEntity.ok().body(animeService.addJSON(file));
+    }
 
-        genreRepository.deleteAll();
-        genreRepository.insert(genresList);
-
-        if (response != null)
-            return response;
-        else
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Cannot get top 100 anime from API"));
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("getJSON")
+    public ResponseEntity<?> getJSON() {
+        return ResponseEntity.ok().body(animeService.getJSON());
     }
 
 }

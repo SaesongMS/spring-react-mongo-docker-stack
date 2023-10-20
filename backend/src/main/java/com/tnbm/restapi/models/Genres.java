@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Document(collection = "genres")
+@Document(collection = "top_genres")
 public class Genres {
   @Id
   private String id;
