@@ -14,4 +14,9 @@ public class Genres {
   private String id;
   private String name;
   private int value;
+
+  public Genres(String name, int value) {
+    this.name = name;
+    this.value = value;
+  }
 }
