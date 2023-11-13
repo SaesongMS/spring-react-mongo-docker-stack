@@ -1,9 +1,11 @@
 package com.tnbm.restapi.models;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.tnbm.restapi.payload.response.GenreResponse;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Getter;
@@ -11,22 +13,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Document(collection = "userlist")
+@Document(collection = "list")
 public class UserList {
   @Id
   private String id;
-  @DBRef
-  private String userId;
-  private List<GenreResponse> watched;
-  private List<GenreResponse> planned;
-
-  @Getter
-  @Setter
-  public class GenreResponse {
-    private String id;
-    private String url;
-    private String tittle;
-    private String year;
-    private String genre;
-  }
+  private List<GenreResponse> watched = new ArrayList<>();
+  private List<GenreResponse> planned = new ArrayList<>();
 }

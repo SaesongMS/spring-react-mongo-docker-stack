@@ -1,52 +1,111 @@
 [{
-  "_id": "ddfa06a5-6d10-4b87-b167-6b40e4ff2d29",
-  "UserName": "A",
-  "NormalizedUserName": "A",
-  "Email": "a@a.a",
-  "NormalizedEmail": "A@A.A",
-  "EmailConfirmed": false,
-  "PasswordHash": "AQAAAAEAACcQAAAAEBaqZYGE4Dn611kBn3c0W6+5CgFpJUmVx6C1EJbYKzfU0Y60SeXwZNxWIsNY+KFlZw==",
-  "SecurityStamp": "GEMVHEFJNTJMBAAHY24ZWD4WL7XIG3Z7",
-  "ConcurrencyStamp": "b0593531-499e-4831-a788-89349de803f2",
-  "PhoneNumber": null,
-  "PhoneNumberConfirmed": false,
-  "TwoFactorEnabled": false,
-  "LockoutEnd": null,
-  "LockoutEnabled": true,
-  "AccessFailedCount": 0,
-  "Version": 1,
-  "CreatedOn": "2023-05-27T13:52:36.6579483Z",
-  "Claims": [],
-  "Roles": [
-    "2423e9be-82d9-431e-8d46-1b285b6e8cad"
+  "_id": {
+    "$oid": "653a81d28902525f2b0566c2"
+  },
+  "username": "user",
+  "normalizedUsername": "USER",
+  "email": "user@user.com",
+  "normalizedEmail": "USER@USER.COM",
+  "emailConfirmed": false,
+  "passwordHash": "$2a$10$g3qavijy0qYhC9qZOdlgf.eyWCnZ9FvmJvnpIcXhPlXJxfSQ4vNXK",
+  "securityStamp": "",
+  "concurrencyStamp": "",
+  "phoneNumber": "",
+  "phoneNumberConfirmed": false,
+  "twoFactorEnabled": false,
+  "lockoutEnd": "",
+  "lockoutEnabled": false,
+  "accessFailedCount": 0,
+  "version": 1,
+  "createdOn": {
+    "$date": "2023-10-26T15:12:18.506Z"
+  },
+  "roles": [
+    {
+      "$ref": "roles",
+      "$id": {
+        "$oid": "653a81c02ac8268fb6c49008"
+      }
+    }
   ],
-  "Logins": [],
-  "Tokens": [],
-  "FullName": "A A"
-},{
-  "_id": "824df7b7-0cc1-44f4-9219-38331fbbeb95",
-  "UserName": "admin",
-  "NormalizedUserName": "ADMIN",
-  "Email": "admin@admin.com",
-  "NormalizedEmail": "ADMIN@ADMIN.COM",
-  "EmailConfirmed": false,
-  "PasswordHash": "AQAAAAEAACcQAAAAEEYJuX57ISwlxfN22aNPbk7yguj0x+KJqUovjYy8vWbOn4vsIE4N+nedzp7OS6W+gQ==",
-  "SecurityStamp": "ZSPQ3GVOHJVCDW6LJ6ICSXCSK7TQTV4M",
-  "ConcurrencyStamp": "e17def18-a395-4efa-b8f2-39cebb184a37",
-  "PhoneNumber": null,
-  "PhoneNumberConfirmed": false,
-  "TwoFactorEnabled": false,
-  "LockoutEnd": null,
-  "LockoutEnabled": true,
-  "AccessFailedCount": 0,
-  "Version": 1,
-  "CreatedOn": "2023-05-27T14:00:33.450519Z",
-  "Claims": [],
-  "Roles": [
-    "2423e9be-82d9-431e-8d46-1b285b6e8cad",
-    "e077cb28-58d0-43a7-915b-985f9058e574"
+  "logins": [],
+  "tokens": [],
+  "fullName": "user123",
+  "_class": "com.tnbm.restapi.models.User"
+},
+{
+  "_id": {
+    "$oid": "653a81df8902525f2b0566c3"
+  },
+  "username": "admin",
+  "normalizedUsername": "ADMIN",
+  "email": "admin@admin.com",
+  "normalizedEmail": "ADMIN@ADMIN.COM",
+  "emailConfirmed": false,
+  "passwordHash": "$2a$10$PcCRxysaN0H0Csr8P64GUuaEZLPZIyS4SHTO.JL.1ylsrwRTX7SaS",
+  "securityStamp": "",
+  "concurrencyStamp": "",
+  "phoneNumber": "",
+  "phoneNumberConfirmed": false,
+  "twoFactorEnabled": false,
+  "lockoutEnd": "",
+  "lockoutEnabled": false,
+  "accessFailedCount": 0,
+  "version": 1,
+  "createdOn": {
+    "$date": "2023-10-26T15:12:31.578Z"
+  },
+  "roles": [
+    {
+      "$ref": "roles",
+      "$id": {
+        "$oid": "653a81c02ac8268fb6c49008"
+      }
+    },
+    {
+      "$ref": "roles",
+      "$id": {
+        "$oid": "653a81c02ac8268fb6c4900a"
+      }
+    }
   ],
-  "Logins": [],
-  "Tokens": [],
-  "FullName": "Admin"
+  "logins": [],
+  "tokens": [],
+  "fullName": "admin123",
+  "_class": "com.tnbm.restapi.models.User"
+},
+{
+  "_id": {
+    "$oid": "653e5c71199ca1735be69b3b"
+  },
+  "username": "bbb",
+  "normalizedUsername": "BBB",
+  "email": "b@b.b",
+  "normalizedEmail": "B@B.B",
+  "emailConfirmed": false,
+  "passwordHash": "$2a$10$pChVvBeOnQA.A2A62Zyhxe2Uo4JCkvHNDCoa7U78WRe6Eu2xJ4KjS",
+  "securityStamp": "",
+  "concurrencyStamp": "",
+  "phoneNumber": "",
+  "phoneNumberConfirmed": false,
+  "twoFactorEnabled": false,
+  "lockoutEnd": "",
+  "lockoutEnabled": false,
+  "accessFailedCount": 0,
+  "version": 1,
+  "createdOn": {
+    "$date": "2023-10-29T13:21:53.202Z"
+  },
+  "roles": [
+    {
+      "$ref": "roles",
+      "$id": {
+        "$oid": "653a81c02ac8268fb6c49008"
+      }
+    }
+  ],
+  "logins": [],
+  "tokens": [],
+  "fullName": "Imiebbb",
+  "_class": "com.tnbm.restapi.models.User"
 }]

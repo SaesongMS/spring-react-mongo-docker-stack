@@ -1,67 +1,72 @@
 [{
   "_id": {
-    "$oid": "64720c76b07ea3a4876a403f"
-  },
-  "name": "Comedy",
-  "value": 240
-},{
-  "_id": {
-    "$oid": "64720c76b07ea3a4876a4040"
-  },
-  "name": "Adventure",
-  "value": 22
-},{
-  "_id": {
-    "$oid": "64720c76b07ea3a4876a4041"
+    "$oid": "654f8bdaec6e4700333e34e3"
   },
   "name": "Action",
-  "value": 46
-},{
+  "value": 118,
+  "_class": "com.tnbm.restapi.models.Genres"
+},
+{
   "_id": {
-    "$oid": "64720c76b07ea3a4876a4042"
+    "$oid": "654f8bdaec6e4700333e34e4"
+  },
+  "name": "Adventure",
+  "value": 25,
+  "_class": "com.tnbm.restapi.models.Genres"
+},
+{
+  "_id": {
+    "$oid": "654f8bdaec6e4700333e34e5"
   },
   "name": "Drama",
-  "value": 68
-},{
+  "value": 5,
+  "_class": "com.tnbm.restapi.models.Genres"
+},
+{
   "_id": {
-    "$oid": "64720c76b07ea3a4876a4043"
-  },
-  "name": "Biography",
-  "value": 22
-},{
-  "_id": {
-    "$oid": "64720c76b07ea3a4876a4044"
-  },
-  "name": "Crime",
-  "value": 34
-},{
-  "_id": {
-    "$oid": "64720c76b07ea3a4876a4045"
-  },
-  "name": "Film-Noir",
-  "value": 1
-},{
-  "_id": {
-    "$oid": "64720c76b07ea3a4876a4046"
-  },
-  "name": "Mystery",
-  "value": 4
-},{
-  "_id": {
-    "$oid": "64720c76b07ea3a4876a4047"
+    "$oid": "654f8bdaec6e4700333e34e6"
   },
   "name": "Horror",
-  "value": 4
-},{
+  "value": 1,
+  "_class": "com.tnbm.restapi.models.Genres"
+},
+{
   "_id": {
-    "$oid": "64720c76b07ea3a4876a4048"
+    "$oid": "654f8bdaec6e4700333e34e7"
   },
-  "name": "Western",
-  "value": 2
-},{
+  "name": "Crime",
+  "value": 1,
+  "_class": "com.tnbm.restapi.models.Genres"
+},
+{
   "_id": {
-    "$oid": "64720c76b07ea3a4876a4049"
+    "$oid": "654f8bdaec6e4700333e34e8"
+  },
+  "name": "Biography",
+  "value": 1,
+  "_class": "com.tnbm.restapi.models.Genres"
+},
+{
+  "_id": {
+    "$oid": "654f8bdaec6e4700333e34e9"
   },
   "name": "Animation",
-  "value": 23
+  "value": 44,
+  "_class": "com.tnbm.restapi.models.Genres"
+},
+{
+  "_id": {
+    "$oid": "654f8bdaec6e4700333e34ea"
+  },
+  "name": "Mystery",
+  "value": 1,
+  "_class": "com.tnbm.restapi.models.Genres"
+},
+{
+  "_id": {
+    "$oid": "654f8bdaec6e4700333e34eb"
+  },
+  "name": "Comedy",
+  "value": 4,
+  "_class": "com.tnbm.restapi.models.Genres"
 }]

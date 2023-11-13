@@ -12,22 +12,20 @@ import AddListElement from "./pages/list/AddListElement";
 import EditListElement from "./pages/list/EditListElement";
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/top-movies" element={<TopMovies />} />
-        <Route path="/top-movies-list" element={<TopMoviesList />} />
-        <Route path="/top-anime" element={<TopAnime />} />
-        <Route path="/top-anime-list" element={<TopAnimeList />} />
-        <Route path="/get-xml" element={<GetXML />} />
-        <Route path="/list" element={<List />} />
-        <Route path="/list-add" element={<AddListElement />} />
-        <Route path="/list-edit" element={<EditListElement />} />
-        <Route path="*" element={<h1>Not Found</h1>} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/top-movies" element={<TopMovies />} />
+      <Route path="/top-movies-list" element={<TopMoviesList />} />
+      <Route path="/top-anime" element={<TopAnime />} />
+      <Route path="/top-anime-list" element={<TopAnimeList />} />
+      <Route path="/get-xml" element={<GetXML />} />
+      <Route path="/list" element={<List />} />
+      <Route path="/list-add" element={<AddListElement />} />
+      <Route path="/list-edit" element={<EditListElement />} />
+      <Route path="*" element={<h1>Not Found</h1>} />
+    </Routes>
   );
 }
 

@@ -3,7 +3,7 @@ version: '3'
 services:
 
   mongo:
-    container_name: mongo
+    container_name: mongodb
     image: mongo
     restart: always
     ports:
@@ -17,14 +17,16 @@ services:
     restart: on-failure
 
   backend:
-    build: ./backend
+    build: 
+      context: ./backend
     container_name: backend
     ports:
-        - "8000:80"
+        - "8000:8000"
     depends_on:
         - mongo
     links:
       - mongo
+    restart: on-failure
 
   frontend:
     build:
