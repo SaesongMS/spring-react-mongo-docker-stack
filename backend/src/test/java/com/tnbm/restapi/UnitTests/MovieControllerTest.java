@@ -36,7 +36,7 @@ public class MovieControllerTest {
     public void testGetTop250_Api() throws Exception {
         when(movieService.GetTop250_Api()).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(get("/api/movie/top_api"))
+        mockMvc.perform(get("/api/movies/top_api"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
     }
@@ -46,7 +46,7 @@ public class MovieControllerTest {
     public void testGetTop250_Db() throws Exception {
         when(movieService.GetTop250_Db()).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(get("/api/movie/top_db"))
+        mockMvc.perform(get("/api/movies/top_db"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
     }
@@ -55,7 +55,7 @@ public class MovieControllerTest {
     public void testGetMoviesByGenre() throws Exception {
         when(movieService.GetMoviesByGenre("Action")).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(get("/api/movie/movies-by-genre")
+        mockMvc.perform(get("/api/movies/movies-by-genre")
                 .param("genre", "Action"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
@@ -65,7 +65,7 @@ public class MovieControllerTest {
     public void testGetTop3() throws Exception {
         when(movieService.GetTop3()).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(get("/api/movie/top3"))
+        mockMvc.perform(get("/api/movies/top3"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
     }

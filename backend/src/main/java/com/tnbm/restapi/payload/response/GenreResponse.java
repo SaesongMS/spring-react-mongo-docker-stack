@@ -8,8 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GenreResponse {
-    private String _id;
-    private String url;
+    private String id;
+    private String img;
     private String title;
     private String year;
     private String genre;
@@ -21,7 +21,7 @@ public class GenreResponse {
         if (o == null || getClass() != o.getClass())
             return false;
         GenreResponse that = (GenreResponse) o;
-        return Objects.equals(url, that.url) &&
+        return Objects.equals(img, that.img) &&
                 Objects.equals(title, that.title) &&
                 Objects.equals(year, that.year) &&
                 Objects.equals(genre, that.genre);

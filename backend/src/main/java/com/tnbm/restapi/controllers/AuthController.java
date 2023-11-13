@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +35,10 @@ import com.tnbm.restapi.repository.UserRepository;
 import com.tnbm.restapi.security.jwt.JwtUtils;
 import com.tnbm.restapi.security.services.UserDetailsImpl;
 
-//for Angular Client (withCredentials)
+
 //@CrossOrigin(origins = "http://localhost:8081", maxAge = 3600, allowCredentials="true")
-@CrossOrigin(origins = "*", maxAge = 3600)
+// @CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -58,6 +60,7 @@ public class AuthController {
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
+    System.out.println("loginRequest: " + loginRequest.toString());
     Authentication authentication = authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -75,7 +78,8 @@ public class AuthController {
         .body(new UserInfoResponse(userDetails.getId(),
             userDetails.getUsername(),
             userDetails.getEmail(),
-            roles));
+            roles,
+            jwtCookie.getValue()));
   }
 
   @PostMapping("/signup")
@@ -135,4 +139,21 @@ public class AuthController {
 
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
+
+  // @GetMapping("/user")
+  // public ResponseEntity<?> getUserInfo() {
+  //   Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+  //   UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+  //   ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+
+  //   List<String> roles = userDetails.getAuthorities().stream()
+  //       .map(item -> item.getAuthority())
+  //       .collect(Collectors.toList());
+
+  //   return ResponseEntity.ok(new UserInfoResponse(userDetails.getId(),
+  //       userDetails.getUsername(),
+  //       userDetails.getEmail(),
+  //       roles,
+  //       jwtCookie.getValue()));
+  // }
 }

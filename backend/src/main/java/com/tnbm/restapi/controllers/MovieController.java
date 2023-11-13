@@ -20,8 +20,9 @@ import com.tnbm.restapi.models.movies.Movie;
 import com.tnbm.restapi.services.MovieService;
 
 // @CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
-@RequestMapping("/api/movie")
+@RequestMapping("/api/movies")
 public class MovieController {
 
     @Autowired

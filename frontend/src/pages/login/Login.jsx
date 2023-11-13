@@ -7,7 +7,7 @@ import Navbar from "../../components/navbar/Navbar";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
-    email: undefined,
+    username: undefined,
     password: undefined,
   });
   const [error, setError] = useState("");
@@ -21,11 +21,16 @@ const Login = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    if(!credentials.email || !credentials.password)
+    if(!credentials.username || !credentials.password)
       return setError("Please fill out all fields");
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("http://localhost:8000/api/authenticate/login", credentials);
+      const res = await axios.post("http://localhost:3000/api/auth/signin", credentials, {
+        headers: {
+          "Content-Type": "application/json",
+          "withCredentials": true
+        },
+      });
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
       navigate("/")
     } catch (err) {
@@ -50,7 +55,7 @@ const Login = () => {
           <div className="shadow-lg border h-min border-[#fea1a1] rounded-3xl bg-[#ffe7cc] flex flex-col items-center justify-center pt-4 pb-8 pl-16 pr-16">
               <button onClick={handleReturn} className="block ml-auto mr-0">&#10006;</button>
               <p className="text-[#fea1a1] text-lg pb-6">Login</p>
-              <input type="text" placeholder="email" id="email" onChange={handleChange} className="p-1 mb-4 bg-[#f9fbe7] border border-[#fea1a1] text-[#fea1a1]" />
+              <input type="text" placeholder="username" id="username" onChange={handleChange} className="p-1 mb-4 bg-[#f9fbe7] border border-[#fea1a1] text-[#fea1a1]" />
               <input type="password" placeholder="password" id="password" onChange={handleChange} className="p-1 mb-4 bg-[#f9fbe7] border border-[#fea1a1] text-[#fea1a1]" />
               <button  onClick={handleClick} className="border shadow-md hover:shadow-lg border-[#fea1a1] bg-[#f9fbe7] text-[#fea1a1] mt-2 mb-1 pt-2 pb-2 pl-6 pr-6 rounded-3xl">Login</button>
                <span className="text-red-500">{error}</span>

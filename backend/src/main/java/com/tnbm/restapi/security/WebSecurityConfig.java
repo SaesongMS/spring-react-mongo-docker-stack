@@ -1,5 +1,7 @@
 package com.tnbm.restapi.security;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +18,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.tnbm.restapi.security.jwt.AuthEntryPointJwt;
 import com.tnbm.restapi.security.jwt.AuthTokenFilter;
@@ -90,7 +95,11 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
         .authorizeHttpRequests(auth -> 
           auth.requestMatchers("/api/auth/**").permitAll()
               .requestMatchers("/api/test/**").permitAll()
-              .anyRequest().authenticated()
+              .requestMatchers("/api/movies/**").permitAll()
+              .requestMatchers("/api/anime/**").permitAll()
+              .requestMatchers("/api/genre/**").permitAll()
+              .requestMatchers("/api/list/**").permitAll()
+              // .anyRequest().authenticated()
         );
     
     http.authenticationProvider(authenticationProvider());
@@ -98,6 +107,18 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
     http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     
     return http.build();
+  }
+
+  @Bean
+  CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000","192.168.1.7:3000"));
+    configuration.setAllowedMethods(Arrays.asList("GET","POST","DELETE"));
+    configuration.setAllowedHeaders(Arrays.asList("*"));
+    configuration.setAllowCredentials(true);
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
   }
 }
 

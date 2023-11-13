@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.tnbm.restapi.models.animes.Anime;
 import com.tnbm.restapi.services.AnimeService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
 @RequestMapping("/api/anime")
 public class AnimeController {
@@ -38,8 +38,8 @@ public class AnimeController {
     }
 
     @GetMapping("animes-by-genre")
-    public ResponseEntity<List<?>> getAnimesByGenre(@RequestBody Map<String, String> requestBody) {
-        return ResponseEntity.ok().body(animeService.getAnimesByGenre(requestBody.get("genre")));
+    public ResponseEntity<List<Anime>> getAnimeByGenre(@RequestParam String genre) {
+        return ResponseEntity.ok().body(animeService.getAnimesByGenre(genre));
     }
 
     @GetMapping("top3")

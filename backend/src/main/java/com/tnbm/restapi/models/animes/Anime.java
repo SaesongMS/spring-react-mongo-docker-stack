@@ -13,7 +13,7 @@ import lombok.Setter;
 @Document(collection = "anime")
 public class Anime {
   @Id
-  private String _id;
+  private String id;
   private Integer mal_id;
   private String url;
   private Images images;
