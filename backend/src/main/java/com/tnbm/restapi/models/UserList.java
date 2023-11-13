@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.tnbm.restapi.payload.response.GenreResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Getter;
@@ -15,8 +16,7 @@ import lombok.Setter;
 @Document(collection = "list")
 public class UserList {
   @Id
-  private String _id;
-  private List<GenreResponse> watched;
-  private List<GenreResponse> planned;
-
+  private String id;
+  private List<GenreResponse> watched = new ArrayList<>();
+  private List<GenreResponse> planned = new ArrayList<>();
 }

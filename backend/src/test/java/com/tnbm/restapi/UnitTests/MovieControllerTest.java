@@ -7,6 +7,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -15,12 +16,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.junit.runner.RunWith;
 import java.util.ArrayList;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.tnbm.restapi.controllers.MovieController;
 import com.tnbm.restapi.services.MovieService;
 
-
-@RunWith(SpringRunner.class)
+@ExtendWith(MockitoExtension.class)
 @WebMvcTest(MovieController.class)
 @WithMockUser(username = "user", password = "password", roles = "USER")
 public class MovieControllerTest {
@@ -33,39 +35,39 @@ public class MovieControllerTest {
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    public void testGetTop250_Api() throws Exception {
+    void testGetTop250_Api() throws Exception {
         when(movieService.GetTop250_Api()).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(get("/api/movie/top_api"))
+        mockMvc.perform(get("/api/movies/top_api"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
     }
 
     @Test
     @WithMockUser()
-    public void testGetTop250_Db() throws Exception {
+    void testGetTop250_Db() throws Exception {
         when(movieService.GetTop250_Db()).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(get("/api/movie/top_db"))
+        mockMvc.perform(get("/api/movies/top_db"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
     }
 
     @Test
-    public void testGetMoviesByGenre() throws Exception {
+    void testGetMoviesByGenre() throws Exception {
         when(movieService.GetMoviesByGenre("Action")).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(get("/api/movie/movies-by-genre")
+        mockMvc.perform(get("/api/movies/movies-by-genre")
                 .param("genre", "Action"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
     }
 
     @Test
-    public void testGetTop3() throws Exception {
+    void testGetTop3() throws Exception {
         when(movieService.GetTop3()).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(get("/api/movie/top3"))
+        mockMvc.perform(get("/api/movies/top3"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
     }

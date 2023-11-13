@@ -2,6 +2,7 @@ import Navbar from "../../components/navbar/Navbar";
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 import { RxDotFilled } from 'react-icons/rx';
 import { useEffect } from 'react';
+import axios from 'axios';
 
 import { useState } from 'react';
 // import "./home.css";
@@ -17,6 +18,24 @@ const Home = () => {
     getSlides();
   }, []);
 
+  useEffect(() => {
+    axios.get("http://localhost:3000/api/test/all", { headers: { "withCredentials": true } })
+    .then((response) => {
+      console.log(response.data);
+    }
+    ).catch((error) => {
+      console.log(error);
+    });
+
+    axios.get("http://localhost:3000/api/test/user", { headers: { "withCredentials": true } })
+    .then((response) => {
+      console.log(response.data);
+    }
+    ).catch((error) => {
+      console.log(error);
+    });
+  }, []);
+
 
   function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
@@ -30,11 +49,32 @@ const Home = () => {
 }
 
   const getSlides = async () => {
-    const response_movie = await fetch("http://localhost:8000/api/movies/top3");
-    const movies = await response_movie.json();
-
-    const response_anime = await fetch("http://localhost:8000/api/anime/top3");
-    const anime = await response_anime.json();
+    // const response_movie = await fetch("http://localhost:3000/api/movies/top3");
+    // const movies = await response_movie.json();
+    const response_movie = axios.get("http://localhost:3000/api/movies/top3", { headers: { "Content-Type": "application/json", "withCredentials": true } })
+    .then((response) => {
+      return response.data;
+    }
+    ).catch((error) => {
+      console.log(error);
+    });
+    const movies_data = await response_movie;
+    const movies = movies_data.map((movie) => ({
+      url: movie.primaryImage.url,
+    }));
+    // const response_anime = await fetch("http://localhost:8000/api/anime/top3");
+    // const anime = await response_anime.json();
+    const response_anime = axios.get("http://localhost:8000/api/anime/top3")
+    .then((response) => {
+      return response.data;
+    }
+    ).catch((error) => {
+      console.log(error);
+    });
+    const anime_data = await response_anime;
+    const anime = anime_data.map((anime) => ({
+      url: anime.images.jpg.large_image_url
+    }));
 
     let content = movies.concat(anime);
 

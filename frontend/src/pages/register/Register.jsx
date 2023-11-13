@@ -93,7 +93,7 @@ const Register = () => {
       errors.empty = "";
     if(validateForm()){
       try {
-        await axios.post("http://localhost:8000/api/authenticate/register", credentials);
+        await axios.post("http://localhost:8000/api/auth/signup", credentials);
         navigate("/login")
       } catch (err) {
         console.log(err.response.data);

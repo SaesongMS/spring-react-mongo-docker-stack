@@ -1,49 +1,56 @@
 [{
   "_id": {
-    "$oid": "647cfdf29258320733ef30ec"
+    "$oid": "654f8bdcec6e4700333e3550"
   },
   "name": "Action",
-  "value": 47
-},{
+  "value": 49,
+  "_class": "com.tnbm.restapi.models.animes.Top_Genres_Anime"
+},
+{
   "_id": {
-    "$oid": "647cfdf29258320733ef30ed"
-  },
-  "name": "Drama",
-  "value": 20
-},{
-  "_id": {
-    "$oid": "647cfdf29258320733ef30ee"
-  },
-  "name": "Comedy",
-  "value": 7
-},{
-  "_id": {
-    "$oid": "647cfdf29258320733ef30ef"
-  },
-  "name": "Award Winning",
-  "value": 9
-},{
-  "_id": {
-    "$oid": "647cfdf29258320733ef30f0"
+    "$oid": "654f8bdcec6e4700333e3551"
   },
   "name": "Adventure",
-  "value": 10
-},{
+  "value": 11,
+  "_class": "com.tnbm.restapi.models.animes.Top_Genres_Anime"
+},
+{
   "_id": {
-    "$oid": "647cfdf29258320733ef30f1"
+    "$oid": "654f8bdcec6e4700333e3552"
   },
-  "name": "Sports",
-  "value": 5
-},{
+  "name": "Drama",
+  "value": 18,
+  "_class": "com.tnbm.restapi.models.animes.Top_Genres_Anime"
+},
+{
   "_id": {
-    "$oid": "647cfdf29258320733ef30f2"
+    "$oid": "654f8bdcec6e4700333e3553"
+  },
+  "name": "Comedy",
+  "value": 7,
+  "_class": "com.tnbm.restapi.models.animes.Top_Genres_Anime"
+},
+{
+  "_id": {
+    "$oid": "654f8bdcec6e4700333e3554"
   },
   "name": "Supernatural",
-  "value": 1
-},{
+  "value": 1,
+  "_class": "com.tnbm.restapi.models.animes.Top_Genres_Anime"
+},
+{
   "_id": {
-    "$oid": "647cfdf29258320733ef30f3"
+    "$oid": "654f8bdcec6e4700333e3555"
   },
-  "name": "Avant Garde",
-  "value": 1
+  "name": "Sports",
+  "value": 5,
+  "_class": "com.tnbm.restapi.models.animes.Top_Genres_Anime"
+},
+{
+  "_id": {
+    "$oid": "654f8bdcec6e4700333e3556"
+  },
+  "name": "Award Winning",
+  "value": 8,
+  "_class": "com.tnbm.restapi.models.animes.Top_Genres_Anime"
 }]

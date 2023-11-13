@@ -12,13 +12,11 @@ import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import com.tnbm.restapi.models.Genres;
@@ -29,7 +27,10 @@ import com.tnbm.restapi.models.movies.MovieTitleText;
 import com.tnbm.restapi.repository.GenreRepository;
 import com.tnbm.restapi.repository.MovieRepository;
 import com.tnbm.restapi.services.MovieService;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class MovieServiceTest {
 
     @Mock

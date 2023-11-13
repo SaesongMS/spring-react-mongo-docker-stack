@@ -3,6 +3,7 @@ package com.tnbm.restapi.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,8 @@ public class ListService {
     @Autowired
     private UserRepository userRepository;
 
+    // TODO:
+    // check again every function to make sure it works as it supposed to
     public List<GenreResponse> addPlanned(String userId, GenreResponse subject) {
         Optional<UserList> ul = listRepository.findById(userId);
         if (ul.isPresent()) {
@@ -28,14 +31,16 @@ public class ListService {
             if (list.getPlanned() != null && list.getPlanned().contains(subject)) {
                 return list.getPlanned();
             } else {
-                list.setPlanned(Arrays.asList(subject));
+                List<GenreResponse> temp = list.getPlanned();
+                temp.add(subject);
+                list.setPlanned(temp);
                 listRepository.save(list);
-                return Arrays.asList(subject);
+                return list.getPlanned();
             }
         } else {
             if (userRepository.findById(userId).isPresent()) {
                 UserList list = new UserList();
-                list.set_id(userId);
+                list.setId(userId);
                 list.setPlanned(Arrays.asList(subject));
                 listRepository.insert(list);
                 return Arrays.asList(subject);
@@ -51,14 +56,16 @@ public class ListService {
             if (list.getWatched() != null && list.getWatched().contains(subject)) {
                 return list.getWatched();
             } else {
-                list.setWatched(Arrays.asList(subject));
+                List<GenreResponse> temp = list.getWatched();
+                temp.add(subject);
+                list.setWatched(temp);
                 listRepository.save(list);
-                return Arrays.asList(subject);
+                return list.getWatched();
             }
         } else {
             if (userRepository.findById(userId).isPresent()) {
                 UserList list = new UserList();
-                list.set_id(userId);
+                list.setId(userId);
                 list.setWatched(Arrays.asList(subject));
                 listRepository.insert(list);
                 return Arrays.asList(subject);
@@ -67,32 +74,30 @@ public class ListService {
         }
     }
 
-    public List<GenreResponse> deletePlanned(String userId) {
+    public List<GenreResponse> deletePlanned(String userId, GenreResponse subject) {
         Optional<UserList> ul = listRepository.findById(userId);
         if (ul.isPresent()) {
             UserList list = ul.get();
             if (list.getPlanned() != null) {
-                List<GenreResponse> planned = list.getPlanned();
-                list.setPlanned(null);
+                list.getPlanned().remove(subject);
                 listRepository.save(list);
-                return planned;
+                return list.getPlanned();
             }
         }
-        return null;
+        return new ArrayList<>();
     }
 
-    public List<GenreResponse> deleteWatched(String userId) {
+    public List<GenreResponse> deleteWatched(String userId, GenreResponse subject) {
         Optional<UserList> ul = listRepository.findById(userId);
         if (ul.isPresent()) {
             UserList list = ul.get();
             if (list.getWatched() != null) {
-                List<GenreResponse> watched = list.getWatched();
-                list.setWatched(null);
+                list.getWatched().remove(subject);
                 listRepository.save(list);
-                return watched;
+                return list.getWatched();
             }
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public List<GenreResponse> getPlanned(String userId) {
@@ -105,7 +110,7 @@ public class ListService {
             Optional<User> u = userRepository.findById(userId);
             if (u.isPresent()) {
                 UserList list = new UserList();
-                list.set_id(userId);
+                list.setId(userId);
                 listRepository.insert(list);
             }
             return Arrays.asList();
@@ -122,7 +127,7 @@ public class ListService {
             Optional<User> u = userRepository.findById(userId);
             if (u.isPresent()) {
                 UserList list = new UserList();
-                list.set_id(userId);
+                list.setId(userId);
                 listRepository.insert(list);
             }
             return Arrays.asList();
@@ -138,10 +143,11 @@ public class ListService {
             Optional<User> u = userRepository.findById(userId);
             if (u.isPresent()) {
                 UserList list = new UserList();
-                list.set_id(userId);
+                list.setId(userId);
                 listRepository.insert(list);
+                return list;
             }
-            return null;
+            return new UserList();
         }
     }
 }
