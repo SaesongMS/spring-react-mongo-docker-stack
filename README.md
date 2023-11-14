@@ -1,14 +1,14 @@
-# aspnet-react-mongo-docker-stack
+# spring-react-mongo-docker-stack
 
-This Docker stack is a simple example of how to run a ASP.NET Core Web API, React, and MongoDB in Docker containers. The stack is composed of the following components:
-- ASP.NET Core Web API 6 as the backend
+This Docker stack is a simple example of how to run a Spring Boot, React, and MongoDB in Docker containers. The stack is composed of the following components:
+- Spring Boot 3.1.4 as the backend
 - React as the frontend
 - MongoDB as the database
 - Additional MongoDB container for seeding the database with data
 
 It also includes the following features:
 - Authentication and authorization with JWT token
-- Admin panel for managing exporting/importing data from/to database to/from JSON/XML file
+- Admin panel for managing exporting/importing data from/to database to/from JSON file
 - Charts for visualizing data
 - List of movies/anime filtered by genre
 - Data is obtained from external APIs. You can find the documentations for them here: https://rapidapi.com/SAdrian/api/moviesdatabase/details and https://docs.api.jikan.moe/
@@ -21,19 +21,22 @@ In order to get started be sure to clone this project onto your Docker Host. Cre
 
 ### Clone the project
 ```
-git clone https://github.com/SaesongMS/aspnet-react-mongo-docker-stack.git
+git clone https://github.com/SaesongMS/spring-react-mongo-docker-stack.git
 ```
 
 ### Build and run the project
 ```
 docker-compose up --build
 ```
+If you encounter an error during docker-compose up, try to change file type of mvnw to Unix format. You can do it in VS Code, by clicking on CRLF in the bottom right corner and selecting LF.
 
 After the build is complete, you should be able to access the application at http://localhost:3000.
 
 Database contains two created users:
-- username: admin@admin.com, password: admin - admin user
-- username: a@a.a, password: 123456 - regular user
+- username: admin, password: 123456 - admin user
+- username: user, password: 123456 - regular user
+
+List of endpoints can be found in [backend/README.md](backend/README.md)
 
 ## Views of the application
 
@@ -57,7 +60,7 @@ Database contains two created users:
 |:--:|
 |*List of movies by genre*|
 
-|![admin panel](examples/admin-panel.JPG)|
+|![admin panel](examples/admin-panel.PNG)|
 |:--:|
 |*Admin panel*|
 
@@ -73,4 +76,4 @@ Database contains two created users:
 |:--:|
 |*Edit element in list*|
 
-This project was created and maintained by [70masz](https://github.com/70masz) and [SaesonMS](https://github.com/SaesongMS)
+This project was created and maintained by [SaesongMS](https://github.com/SaesongMS), [Bobozia](https://github.com/Bobozia) and [70masz](https://github.com/70masz)
