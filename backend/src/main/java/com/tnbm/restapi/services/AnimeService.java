@@ -31,6 +31,9 @@ public class AnimeService {
     @Autowired
     private AnimeGenreRepository genreRepository;
 
+    // fetching top 100 anime from API,
+    // save to db,
+    // return list of genres with number of anime in each genre
     public List<Top_Genres_Anime> getTop100Anime_API() throws InterruptedException {
         String uri = "https://api.jikan.moe/v4/top/anime?page=";
         RestTemplate restTemplate = new RestTemplate();
@@ -62,14 +65,8 @@ public class AnimeService {
             genresList.add(genre);
         }
 
-        Collections.sort(animes, (a, b) -> {
-            Integer rankA = (a.getRank() != null) ? a.getRank() : 0;
-            Integer rankB = (b.getRank() != null) ? b.getRank() : 0;
-            return rankA.compareTo(rankB);
-        });
-
         animeRepository.deleteAll();
-        animeRepository.insert(animes);
+        animeRepository.insert(sortAnimeListByRank(animes));
 
         genreRepository.deleteAll();
         genreRepository.insert(genresList);
@@ -96,12 +93,7 @@ public class AnimeService {
 
     public List<Anime> getTop3() {
         List<Anime> allAnime = animeRepository.findAll();
-        Collections.sort(allAnime, (a, b) -> {
-            Integer rankA = (a.getRank() != null) ? a.getRank() : 0;
-            Integer rankB = (b.getRank() != null) ? b.getRank() : 0;
-            return rankB.compareTo(rankA);
-        });
-        return allAnime.subList(0, 3);
+        return sortAnimeListByRank(allAnime).subList(0, 3);
     }
 
     public String addJSON(MultipartFile file) {
@@ -124,6 +116,15 @@ public class AnimeService {
 
     public List<Anime> getJSON() {
         return animeRepository.findAll();
+    }
+
+    private List<Anime> sortAnimeListByRank(List<Anime> anime) {
+        Collections.sort(anime, (a, b) -> {
+            Integer rankA = (a.getRank() != null) ? a.getRank() : 0;
+            Integer rankB = (b.getRank() != null) ? b.getRank() : 0;
+            return rankA.compareTo(rankB);
+        });
+        return anime;
     }
 
 }
