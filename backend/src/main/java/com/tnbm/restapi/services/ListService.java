@@ -22,8 +22,6 @@ public class ListService {
     @Autowired
     private UserRepository userRepository;
 
-    // TODO:
-    // check again every function to make sure it works as it supposed to
     public List<GenreResponse> addPlanned(String userId, GenreResponse subject) {
         Optional<UserList> ul = listRepository.findById(userId);
         if (ul.isPresent()) {
